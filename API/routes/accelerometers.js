@@ -7,12 +7,7 @@ const Accelerometer = require('../models/Accelerometer');
 //Import the user model for the helper function
 const User = require('../models/User');
 
-<<<<<<< HEAD
-// Add a collected accelerometer data 
-router.post('/', async (req, res) => {
-    // check for user existance 
-    let userExists = await checkKeyAdd(req.body.key);
-=======
+
 // Check all collected data of the accelerometer
 router.get('/', async (req, res) => {
     try{
@@ -36,8 +31,13 @@ router.get('/', async (req, res) => {
         res.json({message: err});
     }
 });
->>>>>>> 7949e93bec04cbb22fc56117dc07fc97f6c6b259
 
+
+
+// Add a collected accelerometer data 
+router.post('/', async (req, res) => {
+    // check for user existance 
+    let userExists = await checkKeyAdd(req.body.key);
     if(userExists){
         // Create a new accelerometer data
         const accelerometer = new Accelerometer({
@@ -58,6 +58,20 @@ router.get('/', async (req, res) => {
         res.json({message: "No matching key found"});
     }
 })
+
+// Helper function to check the existence of the key in the users collection
+function checkKeyAdd(key) {
+    // Create the query
+    let query = { key: key };
+    // return a promise with the answer (true or false)
+    return new Promise(resolve => {
+        User.findOne(query, (err, user) => {
+            if (err) return resolve(false);
+            if (user) return resolve(true);
+            return resolve(false);
+        });
+    });
+}
 
 // export the route
 module.exports = router;
