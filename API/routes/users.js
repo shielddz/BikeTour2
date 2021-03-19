@@ -27,6 +27,27 @@ router.get('/', async (req, res) => {
     }
 });
 
+router.get('/', async (req, res) => {
+    try{
+        // get all the users from the User's collection
+        const users = await User.find();
+        //map through them to create a json object
+        const context = {
+            users: users.map(user => {
+                return {
+                    key: user.key,
+                    firstName: user.firstName,
+                    lastName: user.lastName
+                }
+            })
+        };
+        //return the users as a json response
+        res.json(context);
+    } catch (err){
+        res.json({message: err});
+    }
+});
+
 // Add a User
 router.post('/', async (req, res) => {
     // Create a new user
