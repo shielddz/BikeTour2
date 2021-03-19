@@ -1,0 +1,10 @@
+﻿-Positionnez vous sur la bonne branche selon votre workflow:
+Je me positionne sur la branche "test"
+
+
+-Identifiez les tests unitaires de sa partie:
+Les tests seront fait sur la méthode post des accéléromètres
+
+
+-Identifiez les renforcement de code pouvant être effectués
+Effectuer l’envois des données d’une façon plus sécurisé
